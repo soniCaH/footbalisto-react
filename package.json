@@ -1,0 +1,19 @@
+{
+  "name": "footbalisto-react-components",
+  "version": "0.0.1",
+  "description": "ReactJS components working with the new Footbalisto REST API.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/soniCaH/footbalisto-react.git"
+  },
+  "author": "Kevin Van Ransbeeck <kevin.van.ransbeeck@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/soniCaH/footbalisto-react/issues"
+  },
+  "homepage": "https://github.com/soniCaH/footbalisto-react#readme"
+}
