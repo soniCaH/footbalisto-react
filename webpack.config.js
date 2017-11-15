@@ -11,13 +11,16 @@ var config = {
    module: {
      loaders: [
        {
-         test: /\.jsx?$/,
+         test: /\.(js|jsx)?$/,
          exclude: /node_modules/,
          loader: 'babel-loader',
-       query: {
-         presets: ['es2015', 'react']
-            }
+         query: {
+         	presets: ['es2015', 'react']
          }
+       }, {
+         test: /\.scss$/,
+         loaders: ["style-loader", "css-loader", "sass-loader"]
+       }
       ]
    }
 }
