@@ -1,38 +1,46 @@
 import React from 'react';
 
-class App extends React.Component {
-   render() {
-      return (
-         <div>
-            Hey React Do!
-         </div>
-      );
-   }
-}
-
-class ItemLister extends React.Component {
+class RankingLister extends React.Component {
     constructor() {
         super();
-        this.state = { items: [] };
+        this.state = { 
+            data: [], 
+            loading: true 
+        };
     }
     
     componentDidMount() {
-        fetch(`http://localhost:9000/seasons/1718/regions/bra/rankings/3C`) 
-            .then(result=> {
-                this.setState({items:result.json()});
-            });
+        fetch("http://localhost:9000/seasons/1718/regions/bra/rankings/3C", {
+            credentials: 'same-origin'
+        })
+        .then(response => response.json())
+        .then(json => this.setState({data: json, loading: false}));
     }
     
-    render() {        
-        return(
-            <div>
-                <div>Items:</div>
-                { this.state.items.map(item=> { return <div>{item.name}</div>}) }          
-            </div>  
-        );
+    render () {
+        if (this.state.loading === false && this.state.data) {
+            this.state.data.sort((a, b) => a.position > b.position)
+
+            return (
+                <ul>
+                {
+
+                    this.state.data.map((result, i) => (
+                        <li key={i}>Position {result.position}: {result.team} with {result.points} points</li>)
+                    )
+                }
+                </ul>
+            )
+
+        } else { 
+            return (
+                <div>
+                    Loading...
+                </div>
+            )
+        }
+        
     }
 }
 
-//export default App;
-export default ItemLister;
-
+export default RankingLister;
