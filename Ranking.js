@@ -1,6 +1,6 @@
 import React from 'react';
 
-class RankingItem extends React.Component {
+class RankingRow extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -23,7 +23,7 @@ class RankingItem extends React.Component {
     }
 }
 
-class RankingLister extends React.Component {
+class Ranking extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -33,7 +33,6 @@ class RankingLister extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props.season);
         fetch("http://localhost:9000/seasons/" + this.props.season + "/regions/" + this.props.province + "/rankings/" + this.props.division, {
             credentials: 'same-origin'
         })
@@ -50,8 +49,7 @@ class RankingLister extends React.Component {
                     <thead><tr><th>#</th><th>Team</th><th>M</th><th>W</th><th>D</th><th>L</th><th>G-</th><th>G+</th><th>+/-</th><th>Pts</th></tr></thead>
                     <tbody>
                     {
-                        this.state.data.map((result, i) => (<RankingItem result={result} key={i} highlight={this.props.highlight}/>)
-                        )
+                        this.state.data.map((result, i) => (<RankingRow result={result} key={i} highlight={this.props.highlight}/>))
                     }
                     </tbody>
                 </table>
@@ -68,4 +66,4 @@ class RankingLister extends React.Component {
     }
 }
 
-export default RankingLister;
+export default Ranking;

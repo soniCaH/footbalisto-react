@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import RankingLister from './App.js';
+import Ranking from './Ranking.js';
+import Matchday from './Matchday.js';
 
-//ReactDOM.render(<App />, document.getElementById('app'));
-ReactDOM.render(<RankingLister season="1718" province="bra" division="3C" highlight="KCVV.Elewijt A" />, document.getElementById('ranking-kcvvelewijt-a'));
-ReactDOM.render(<RankingLister season="1718" province="bra" division="4D" highlight="KCVV.Elewijt B" />, document.getElementById('ranking-kcvvelewijt-b'));
+ReactDOM.render(<Ranking season="1718" province="bra" division="3C" highlight="KCVV.Elewijt A" />, document.getElementById('ranking-kcvvelewijt-a'));
+ReactDOM.render(<Ranking season="1718" province="bra" division="4D" highlight="KCVV.Elewijt B" />, document.getElementById('ranking-kcvvelewijt-b'));
+ReactDOM.render(<Matchday season="1718" province="bra" division="3C" regnumber="00055" />, document.getElementById('matchday-kcvvelewijt-a'));
+ReactDOM.render(<Matchday season="1718" province="bra" division="4D" regnumber="00055" />, document.getElementById('matchday-kcvvelewijt-b'));
