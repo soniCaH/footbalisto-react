@@ -4,8 +4,7 @@
   "description": "ReactJS components working with the new Footbalisto REST API.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --hot"
+    "start": "webpack-dev-server --progress --inline --hot"
   },
   "repository": {
     "type": "git",
@@ -19,6 +18,7 @@
   "homepage": "https://github.com/soniCaH/footbalisto-react#readme",
   "dependencies": {
     "moment": "^2.19.3",
+    "option-monad": "^1.4.1",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "webpack": "^3.8.1",
