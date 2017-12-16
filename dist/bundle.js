@@ -34252,55 +34252,55 @@ var RankingRow = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 'tr',
-                { className: this.props.result.team === this.props.highlight ? 'highlight' : null },
+                { className: this.props.result.team === this.props.highlight ? 'highlightRow rankingRow' : 'rankingRow' },
                 _react2.default.createElement(
                     'td',
-                    null,
+                    { className: 'rankingRow-Position rankingRow-Integer' },
                     this.props.result.position
                 ),
                 _react2.default.createElement(
                     'td',
-                    null,
+                    { className: 'rankingRow-Teamname' },
                     this.props.result.team
                 ),
                 _react2.default.createElement(
                     'td',
-                    null,
+                    { className: 'rankingRow-Matches rankingRow-Integer' },
                     this.props.result.matches
                 ),
                 _react2.default.createElement(
                     'td',
-                    null,
+                    { className: 'rankingRow-Wins rankingRow-Integer' },
                     this.props.result.wins
                 ),
                 _react2.default.createElement(
                     'td',
-                    null,
+                    { className: 'rankingRow-Draws rankingRow-Integer' },
                     this.props.result.draws
                 ),
                 _react2.default.createElement(
                     'td',
-                    null,
+                    { className: 'rankingRow-Losses rankingRow-Integer' },
                     this.props.result.losses
                 ),
                 _react2.default.createElement(
                     'td',
-                    null,
+                    { className: 'rankingRow-GoalsPro rankingRow-Integer' },
                     this.props.result.goalsPro
                 ),
                 _react2.default.createElement(
                     'td',
-                    null,
+                    { className: 'rankingRow-GoalsAgainst rankingRow-Integer' },
                     this.props.result.goalsAgainst
                 ),
                 _react2.default.createElement(
                     'td',
-                    null,
+                    { className: 'rankingRow-GoalsDiff rankingRow-Integer' },
                     this.props.result.goalsPro - this.props.result.goalsAgainst
                 ),
                 _react2.default.createElement(
                     'td',
-                    null,
+                    { className: 'rankingRow-Points rankingRow-Integer' },
                     this.props.result.points
                 )
             );
@@ -34350,61 +34350,61 @@ var Ranking = function (_React$Component2) {
 
                 return _react2.default.createElement(
                     'table',
-                    { cellPadding: '0', cellSpacing: '0' },
+                    { className: 'rankingTable' },
                     _react2.default.createElement(
                         'thead',
                         null,
                         _react2.default.createElement(
                             'tr',
-                            null,
+                            { className: 'rankingRow' },
                             _react2.default.createElement(
                                 'th',
-                                null,
+                                { className: 'rankingRow-Position rankingRow-Integer' },
                                 '#'
                             ),
                             _react2.default.createElement(
                                 'th',
-                                null,
+                                { className: 'rankingRow-Teamname' },
                                 'Team'
                             ),
                             _react2.default.createElement(
                                 'th',
-                                null,
+                                { className: 'rankingRow-Matches rankingRow-Integer' },
                                 'M'
                             ),
                             _react2.default.createElement(
                                 'th',
-                                null,
+                                { className: 'rankingRow-Wins rankingRow-Integer' },
                                 'W'
                             ),
                             _react2.default.createElement(
                                 'th',
-                                null,
+                                { className: 'rankingRow-Draws rankingRow-Integer' },
                                 'D'
                             ),
                             _react2.default.createElement(
                                 'th',
-                                null,
+                                { className: 'rankingRow-Losses rankingRow-Integer' },
                                 'L'
                             ),
                             _react2.default.createElement(
                                 'th',
-                                null,
-                                'G-'
-                            ),
-                            _react2.default.createElement(
-                                'th',
-                                null,
+                                { className: 'rankingRow-GoalsPro rankingRow-Integer' },
                                 'G+'
                             ),
                             _react2.default.createElement(
                                 'th',
-                                null,
+                                { className: 'rankingRow-GoalsAgainst rankingRow-Integer' },
+                                'G-'
+                            ),
+                            _react2.default.createElement(
+                                'th',
+                                { className: 'rankingRow-GoalsDiff rankingRow-Integer' },
                                 '+/-'
                             ),
                             _react2.default.createElement(
                                 'th',
-                                null,
+                                { className: 'rankingRow-Points rankingRow-Integer' },
                                 'Pts'
                             )
                         )
@@ -34499,19 +34499,24 @@ var MatchdayRow = function (_React$Component) {
             moment.locale('nl-BE');
 
             var d = new moment(result.dateTime);
-            var timestamp = d.format("dddd D MMMM YYYY HH:mm");
+            var dateTime = d.format("dddd D MMMM YYYY HH:mm");
 
             return _react2.default.createElement(
                 "tr",
-                { className: result.regNumberHome === regnumber || result.regNumberAway === regnumber ? 'highlight' : null },
+                { className: result.regNumberHome === regnumber || result.regNumberAway === regnumber ? 'highlightRow matchdayRow' : 'matchdayRow' },
                 _react2.default.createElement(
                     "td",
-                    null,
-                    timestamp
+                    { className: "matchdayRow-Date" },
+                    dateTime
                 ),
                 _react2.default.createElement(
                     "td",
-                    null,
+                    { className: "matchdayRow-Team matchdayRow-Team--Home" },
+                    result.home
+                ),
+                _react2.default.createElement(
+                    "td",
+                    { className: "matchdayRow-Logo matchdayRow-Logo--Home" },
                     _react2.default.createElement("img", { src: homeLogo, ref: function ref(homeLogo) {
                             return _this2.homeLogo = homeLogo;
                         }, onError: function onError() {
@@ -34520,24 +34525,14 @@ var MatchdayRow = function (_React$Component) {
                 ),
                 _react2.default.createElement(
                     "td",
-                    null,
-                    result.home
-                ),
-                _react2.default.createElement(
-                    "td",
-                    null,
+                    { className: "matchdayRow-Score" },
 
                     // If there are results, display them
                     typeof result.resultHome !== 'undefined' && typeof result.resultAway !== 'undefined' ? result.resultHome + ' - ' + result.resultAway : 'vs'
                 ),
                 _react2.default.createElement(
                     "td",
-                    null,
-                    result.away
-                ),
-                _react2.default.createElement(
-                    "td",
-                    null,
+                    { className: "matchdayRow-Logo matchdayRow-Logo--Away" },
                     _react2.default.createElement("img", { src: awayLogo, ref: function ref(awayLogo) {
                             return _this2.awayLogo = awayLogo;
                         }, onError: function onError() {
@@ -34546,7 +34541,12 @@ var MatchdayRow = function (_React$Component) {
                 ),
                 _react2.default.createElement(
                     "td",
-                    null,
+                    { className: "matchdayRow-Team matchdayRow-Team--Away" },
+                    result.away
+                ),
+                _react2.default.createElement(
+                    "td",
+                    { className: "matchdayRow-Status" },
                     Option(this.statuses[result.status]).getOrElse("")
                 )
             );
@@ -34603,33 +34603,34 @@ var Matchday = function (_React$Component2) {
 
                 return _react2.default.createElement(
                     "table",
-                    { cellPadding: "0", cellSpacing: "0" },
+                    { className: "matchdayTable" },
                     _react2.default.createElement(
                         "thead",
                         null,
                         _react2.default.createElement(
                             "tr",
-                            null,
+                            { className: "matchdayRow" },
                             _react2.default.createElement(
                                 "th",
-                                null,
+                                { className: "matchdayRow-Date" },
                                 "Datum"
                             ),
                             _react2.default.createElement(
                                 "th",
-                                { colSpan: "2" },
+                                { colSpan: "2", className: "matchdayRow-Team matchdayRow-Team--Home" },
                                 "Thuisploeg"
                             ),
                             _react2.default.createElement(
                                 "th",
-                                null,
+                                { className: "matchdayRow-Score" },
                                 "vs"
                             ),
                             _react2.default.createElement(
                                 "th",
-                                { colSpan: "2" },
+                                { colSpan: "2", className: "matchdayRow-Team matchdayRow-Team--Away" },
                                 "Uitploeg"
-                            )
+                            ),
+                            _react2.default.createElement("th", { className: "matchdayRow-Status" })
                         )
                     ),
                     _react2.default.createElement(

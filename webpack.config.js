@@ -6,6 +6,12 @@ var config = {
         filename: "bundle.js",
         path: __dirname + "/dist",
     },
+
+    devServer: {
+        inline: true,
+        port: 8080
+    },
+
     module: {
         loaders: [
             {

@@ -1,0 +1,74 @@
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+}
+
+thead {
+    background: rgb(90, 186, 58);
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+th {
+    font-weight: normal;
+}
+
+th, td {
+    padding: 11px 8px;
+    text-align: center;
+}
+
+.highlightRow {
+    background-color: #BADA55;
+}
+
+.rankingTable th, .rankingTable td {
+    border: 1px solid #ddd;
+}
+
+.rankingRow-Integer {
+    width: 5em;
+}
+
+.rankingRow-Teamname {
+    text-align: left;
+}
+
+th.matchdayRow-Team {
+    width: 35%;
+}
+
+.matchdayRow-Date {
+    text-align: left;
+    width: 14%;
+}
+
+.matchdayRow-Team--Home, .matchdayRow-Logo--Home {
+    text-align: right;
+}
+
+.matchdayRow-Team--Away, .matchdayRow-Logo--Away {
+    text-align: left;
+}
+
+.matchdayRow-Logo img {
+    height: auto;
+    max-width: 5em;
+    width: 5em;
+}
+
+.matchdayRow-Score {
+}
+
+.matchdayRow-Status {
+    text-align: left;
+    width: 8%;
+}

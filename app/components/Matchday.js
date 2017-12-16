@@ -28,23 +28,23 @@ class MatchdayRow extends React.Component {
         moment.locale('nl-BE');
 
         let d = new moment( result.dateTime );
-        let timestamp = d.format("dddd D MMMM YYYY HH:mm");
+        let dateTime = d.format("dddd D MMMM YYYY HH:mm");
 
         return (
-            <tr className={(result.regNumberHome === regnumber || result.regNumberAway === regnumber) ? 'highlight' : null}>
-                <td>{timestamp}</td>
-                <td><img src={homeLogo} ref={homeLogo => this.homeLogo = homeLogo} onError={() => this.homeLogo.src = 'images/default.png' }alt={result.home} /></td>
-                <td>{result.home}</td>
-                <td>
+            <tr className={(result.regNumberHome === regnumber || result.regNumberAway === regnumber) ? 'highlightRow matchdayRow' : 'matchdayRow'}>
+                <td className='matchdayRow-Date'>{dateTime}</td>
+                <td className='matchdayRow-Team matchdayRow-Team--Home'>{result.home}</td>
+                <td className='matchdayRow-Logo matchdayRow-Logo--Home'><img src={homeLogo} ref={homeLogo => this.homeLogo = homeLogo} onError={() => this.homeLogo.src = 'images/default.png' }alt={result.home} /></td>
+                <td className='matchdayRow-Score'>
                 {
                     // If there are results, display them
                     (typeof result.resultHome !== 'undefined' && typeof result.resultAway !== 'undefined') ? 
                     result.resultHome + ' - ' + result.resultAway: 
                     'vs'
                 }</td>
-                <td>{result.away}</td>
-                <td><img src={awayLogo} ref={awayLogo => this.awayLogo = awayLogo} onError={() => this.awayLogo.src = 'images/default.png' } alt={result.away} /></td>
-                <td>{Option(this.statuses[result.status]).getOrElse("")}</td>
+                <td className='matchdayRow-Logo matchdayRow-Logo--Away'><img src={awayLogo} ref={awayLogo => this.awayLogo = awayLogo} onError={() => this.awayLogo.src = 'images/default.png' } alt={result.away} /></td>
+                <td className='matchdayRow-Team matchdayRow-Team--Away'>{result.away}</td>
+                <td className='matchdayRow-Status'>{Option(this.statuses[result.status]).getOrElse("")}</td>
             </tr>
         )
     }
@@ -74,13 +74,14 @@ class Matchday extends React.Component {
             this.state.data.sort((a, b) => a.dateTime > b.dateTime)
 
             return (
-                <table cellPadding="0" cellSpacing="0">
+                <table className='matchdayTable'>
                     <thead>
-                    <tr>
-                        <th>Datum</th>
-                        <th colSpan="2">Thuisploeg</th>
-                        <th>vs</th>
-                        <th colSpan="2">Uitploeg</th>
+                    <tr className='matchdayRow'>
+                        <th className='matchdayRow-Date'>Datum</th>
+                        <th colSpan="2" className='matchdayRow-Team matchdayRow-Team--Home'>Thuisploeg</th>
+                        <th className='matchdayRow-Score'>vs</th>
+                        <th colSpan="2" className='matchdayRow-Team matchdayRow-Team--Away'>Uitploeg</th>
+                        <th className='matchdayRow-Status'></th>
                     </tr>
                     </thead>
                     <tbody>
