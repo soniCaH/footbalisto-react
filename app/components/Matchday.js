@@ -1,6 +1,7 @@
 import React from 'react';
 
 const {Option} = require("option-monad");
+const Config = require("Config");
 
 class MatchdayRow extends React.Component {
     constructor(props) {
@@ -18,30 +19,32 @@ class MatchdayRow extends React.Component {
     }
 
     render() {
-        let homeLogo = "http://localhost:9000/logo/" + this.props.result.regNumberHome;
-        let awayLogo = "http://localhost:9000/logo/" + this.props.result.regNumberAway;
+        let {result, regnumber} = this.props;
+
+        let homeLogo = Config.serverUrl + "/logo/" + result.regNumberHome;
+        let awayLogo = Config.serverUrl + "/logo/" + result.regNumberAway;
 
         let moment = require('moment');
         moment.locale('nl-BE');
 
-        let d = new moment( this.props.result.dateTime );
+        let d = new moment( result.dateTime );
         let timestamp = d.format("dddd D MMMM YYYY HH:mm");
 
         return (
-            <tr className={(this.props.result.regNumberHome === this.props.regnumber || this.props.result.regNumberAway === this.props.regnumber) ? 'highlight' : null}>
+            <tr className={(result.regNumberHome === regnumber || result.regNumberAway === regnumber) ? 'highlight' : null}>
                 <td>{timestamp}</td>
-                <td><img src={homeLogo} ref={homeLogo => this.homeLogo = homeLogo} onError={() => this.homeLogo.src = 'build/images/default.png' }alt={this.props.result.home} /></td>
-                <td>{this.props.result.home}</td>
+                <td><img src={homeLogo} ref={homeLogo => this.homeLogo = homeLogo} onError={() => this.homeLogo.src = 'images/default.png' }alt={result.home} /></td>
+                <td>{result.home}</td>
                 <td>
                 {
                     // If there are results, display them
-                    (typeof this.props.result.resultHome !== 'undefined' && typeof this.props.result.resultAway !== 'undefined') ? 
-                    this.props.result.resultHome + ' - ' + this.props.result.resultAway: 
+                    (typeof result.resultHome !== 'undefined' && typeof result.resultAway !== 'undefined') ? 
+                    result.resultHome + ' - ' + result.resultAway: 
                     'vs'
                 }</td>
-                <td>{this.props.result.away}</td>
-                <td><img src={awayLogo} ref={awayLogo => this.awayLogo = awayLogo} onError={() => this.awayLogo.src = 'build/images/default.png' } alt={this.props.result.away} /></td>
-                <td>{Option(this.statuses[this.props.result.status]).getOrElse("")}</td>
+                <td>{result.away}</td>
+                <td><img src={awayLogo} ref={awayLogo => this.awayLogo = awayLogo} onError={() => this.awayLogo.src = 'images/default.png' } alt={result.away} /></td>
+                <td>{Option(this.statuses[result.status]).getOrElse("")}</td>
             </tr>
         )
     }
@@ -57,8 +60,9 @@ class Matchday extends React.Component {
     }
 
     componentDidMount() {
+        let {season, province, division, regnumber} = this.props;
 
-        fetch("http://localhost:9000/seasons/" + this.props.season + "/regions/" + this.props.province + "/matches/" + this.props.division + "/team/" + this.props.regnumber, {
+        fetch(Config.serverUrl + "/seasons/" + season + "/regions/" + province + "/matches/" + division + "/team/" + regnumber, {
             credentials: 'same-origin'
         })
             .then(response => response.json())

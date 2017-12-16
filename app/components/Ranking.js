@@ -1,5 +1,7 @@
 import React from 'react';
 
+const Config = require("Config");
+
 class RankingRow extends React.Component {
     constructor(props) {
         super(props);
@@ -33,7 +35,7 @@ class Ranking extends React.Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:9000/seasons/" + this.props.season + "/regions/" + this.props.province + "/rankings/" + this.props.division, {
+        fetch(Config.serverUrl + "/seasons/" + this.props.season + "/regions/" + this.props.province + "/rankings/" + this.props.division, {
             credentials: 'same-origin'
         })
             .then(response => response.json())

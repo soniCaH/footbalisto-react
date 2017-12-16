@@ -1,27 +1,29 @@
 var config = {
-   entry: './index.js',
-   output: {
-      path:'/',
-      filename: 'bundle.js',
-   },
-   devServer: {
-      inline: true,
-      port: 8080
-   },
-   module: {
-     loaders: [
-       {
-         test: /\.(js|jsx)?$/,
-         exclude: /node_modules/,
-         loader: 'babel-loader',
-         query: {
-         	presets: ['es2015', 'react']
-         }
-       }, {
-         test: /\.scss$/,
-         loaders: ["style-loader", "css-loader", "sass-loader"]
-       }
-      ]
-   }
+    context: __dirname + "/app",
+    entry: "./main.js",
+
+    output: {
+        filename: "bundle.js",
+        path: __dirname + "/dist",
+    },
+    module: {
+        loaders: [
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: 'babel-loader',
+                query: {
+                    presets: ['react', 'es2015']
+                }
+            }
+        ],
+    },
+    externals: {
+        'Config': JSON.stringify(process.env.ENV === 'production' ? {
+            serverUrl: "https://footbalisto.be/api"
+        } : {
+                serverUrl: "http://localhost:9000"
+            })
+    }
 }
 module.exports = config;
