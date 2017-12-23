@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "moment": "^2.19.3",
+    "moment-timezone": "^0.5.14",
     "option-monad": "^1.4.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"

@@ -8,7 +8,7 @@ class RankingRow extends React.Component {
     }
 
     render() {
-        return(
+        return (
             <tr className={this.props.result.team === this.props.highlight ? 'highlightRow rankingRow' : 'rankingRow'}>
                 <td className='rankingRow-Position rankingRow-Integer'>{this.props.result.position}</td>
                 <td className='rankingRow-Teamname'>{this.props.result.team}</td>
@@ -18,7 +18,7 @@ class RankingRow extends React.Component {
                 <td className='rankingRow-Losses rankingRow-Integer'>{this.props.result.losses}</td>
                 <td className='rankingRow-GoalsPro rankingRow-Integer'>{this.props.result.goalsPro}</td>
                 <td className='rankingRow-GoalsAgainst rankingRow-Integer'>{this.props.result.goalsAgainst}</td>
-                <td className='rankingRow-GoalsDiff rankingRow-Integer'>{this.props.result.goalsPro-this.props.result.goalsAgainst}</td>
+                <td className='rankingRow-GoalsDiff rankingRow-Integer'>{this.props.result.goalsPro - this.props.result.goalsAgainst}</td>
                 <td className='rankingRow-Points rankingRow-Integer'>{this.props.result.points}</td>
             </tr>
         )
@@ -32,14 +32,36 @@ class Ranking extends React.Component {
             data: [],
             loading: true
         };
+
+        this.baseUrl = Config.serverUrl;
+        this.refreshRate = Config.refreshRate;
+        this.timeout = {};
     }
 
-    componentDidMount() {
-        fetch(Config.serverUrl + "/seasons/" + this.props.season + "/regions/" + this.props.province + "/rankings/" + this.props.division, {
+    updateData() {
+        let { season, province, division } = this.props;
+
+        console.log('Fetching rankings');
+
+        fetch(this.baseUrl + "/seasons/" + season + "/regions/" + province + "/rankings/" + division, {
             credentials: 'same-origin'
         })
             .then(response => response.json())
-            .then(json => this.setState({data: json, loading: false}));
+            .then(json => this.setState({ data: json, loading: false }));
+
+        this.timeout = setInterval(() => {
+            this.updateData(() => {
+                console.log('Updating the rankings.');
+            });
+        }, this.refreshRate);
+    }
+
+    componentDidMount() {
+        this.updateData();
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timeout);
     }
 
     render() {
@@ -63,9 +85,9 @@ class Ranking extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                    {
-                        this.state.data.map((result, i) => (<RankingRow result={result} key={i} highlight={this.props.highlight}/>))
-                    }
+                        {
+                            this.state.data.map((result, i) => (<RankingRow result={result} key={i} highlight={this.props.highlight} />))
+                        }
                     </tbody>
                 </table>
             )

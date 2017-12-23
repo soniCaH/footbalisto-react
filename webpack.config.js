@@ -26,9 +26,11 @@ var config = {
     },
     externals: {
         'Config': JSON.stringify(process.env.ENV === 'production' ? {
-            serverUrl: "https://footbalisto.be/api"
+            serverUrl: "https://footbalisto.be/api",
+            refreshRate: 360000
         } : {
-                serverUrl: "http://localhost:9000"
+                serverUrl: "http://localhost:8085",
+                refreshRate: 60000
             })
     }
 }
